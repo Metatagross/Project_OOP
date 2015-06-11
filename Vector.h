@@ -127,12 +127,12 @@ T& Vector<T>::front()
 template<class T>
 void Vector<T>::insert(int index, T value)
 {
-	if (size < index && index < capacity)
-	{
-		a[index] = value;
-		size = index;
-	}
-	if (index>capacity)
+	//if (size < index && index < capacity)
+	//{
+	//	a[index] = value;
+	//	size = index+1;
+	//}
+	if (index>size)
 	{
 		throw std::invalid_argument("Error! Insertion failed!");
 	}
@@ -230,7 +230,7 @@ void Vector<T>::display()
 	{
 		for (int i = 0; i < getSize(); i++)
 		{
-			cout << operator[](i) << endl;
+			cout << *(operator[](i)) << endl;
 			cout << endl;
 		}
 	}
@@ -246,7 +246,11 @@ void Vector<T>::swap(int index1, int index2)
 template<class T>
 int Vector<T>::find(int first, int last, T& value)
 {
-	for (int i = 0; i < getSize(); i++)
+	if (last >= getSize())
+	{
+		throw std::out_of_range("Error! Out of range!");
+	}
+	for (int i = first; i < last; i++)
 	{
 		if (a[i]==value)
 		{
